@@ -1,7 +1,9 @@
 import { Button, Container, ListGroup, Form } from "react-bootstrap";
 import classes from "./styles.module.css";
+import { useNavigate } from "react-router-dom";
 
 const TodosListPage = ({ todos, handleToggle }) => {
+  const navigate = useNavigate();
 
   return (
     <Container className={classes.container}>
@@ -24,7 +26,7 @@ const TodosListPage = ({ todos, handleToggle }) => {
       <Button
         className={classes.btn}
         variant="primary"
-        onClick={() => {}}
+        onClick={() => navigate("/add")}
       >
         Add Task
       </Button>

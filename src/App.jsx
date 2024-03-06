@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import TodosListPage from "./components/TodosListPage";
 import { useState } from "react";
+import AddTodoPage from "./components/AddTodoPage";
 
 function App() {
   const [todos, setTodos] = useState([
@@ -15,6 +16,14 @@ function App() {
       )
     );
   };
+  const addTodo = (text) => {
+    const newTodo = {
+      id: Date.now(),
+      text: text,
+      completed: false,
+    };
+    setTodos([...todos, newTodo]);
+  };
   return (
     <BrowserRouter>
       <Routes>
@@ -22,6 +31,7 @@ function App() {
           path="/"
           element={<TodosListPage todos={todos} handleToggle={handleToggle} />}
         />
+        <Route path="/add" element={<AddTodoPage addTodo={addTodo} />} />
       </Routes>
     </BrowserRouter>
   );
