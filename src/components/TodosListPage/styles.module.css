@@ -1,0 +1,9 @@
+.checked label {
+  text-decoration: line-through;
+}
+.container {
+  margin: 2vw !important;
+}
+.btn {
+  margin-top: 15px;
+}
