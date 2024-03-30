@@ -2,8 +2,24 @@
   text-decoration: line-through;
 }
 .container {
-  margin: 2vw !important;
+  margin: 2vw;
 }
-.btn {
+.addBtn {
   margin-top: 15px;
+}
+
+.list {
+  display: flex !important;
+  justify-content: space-between;
+  border-color: #a7acb1 !important;
+}
+
+.deleteBtn,
+.editBtn {
+  margin-left: 10px;
+}
+
+.editInput {
+  width: 50% !important;
+  border-color: #b4bcc4 !important;
 }

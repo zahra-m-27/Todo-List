@@ -1,17 +1,19 @@
-import { useState } from "react";
 import { Button, Form, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import classes from "./styles.module.css";
+import { useState } from "react";
 
-const AddTodoPage = ({ addTodo }) => {
+function AddTodoPage({ addTodo }) {
   const [text, setText] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTodo(text);
-    setText("");
-    navigate("/");
+    if (text.trim()) {
+      addTodo(text);
+      setText("");
+      navigate("/");
+    }
   };
 
   return (
@@ -23,6 +25,7 @@ const AddTodoPage = ({ addTodo }) => {
           placeholder="Enter task"
           value={text}
           onChange={(e) => setText(e.target.value)}
+          onKeyDown={(e) => (e.key === "Enter" ? handleSubmit(e) : null)}
         />
       </Form.Group>
       <Button className={classes.btn} variant="success" onClick={handleSubmit}>
@@ -30,6 +33,6 @@ const AddTodoPage = ({ addTodo }) => {
       </Button>
     </Container>
   );
-};
+}
 
 export default AddTodoPage;

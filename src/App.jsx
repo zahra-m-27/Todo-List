@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import TodosListPage from "./components/TodosListPage";
-import { useState } from "react";
 import AddTodoPage from "./components/AddTodoPage";
+import { useState } from "react";
+import TodosListPage from "./components/TodosListPage";
 
 function App() {
   const [todos, setTodos] = useState([
@@ -16,6 +16,18 @@ function App() {
       )
     );
   };
+
+  const handleEdit = (id, newText) => {
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, text: newText } : todo
+    );
+    setTodos(updatedTodos);
+  };
+
+  const handleDelete = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
   const addTodo = (text) => {
     const newTodo = {
       id: Date.now(),
@@ -24,17 +36,24 @@ function App() {
     };
     setTodos([...todos, newTodo]);
   };
+
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path="/"
-          element={<TodosListPage todos={todos} handleToggle={handleToggle} />}
+          element={
+            <TodosListPage
+              todos={todos}
+              handleToggle={handleToggle}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+            />
+          }
         />
         <Route path="/add" element={<AddTodoPage addTodo={addTodo} />} />
       </Routes>
     </BrowserRouter>
   );
 }
-
 export default App;
