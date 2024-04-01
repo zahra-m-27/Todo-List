@@ -1,13 +1,18 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AddTodoPage from "./components/AddTodoPage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodosListPage from "./components/TodosListPage";
 
 function App() {
-  const [todos, setTodos] = useState([
-    { id: Date.now(), text: "Buy Grocery", completed: false },
-    { id: Date.now() - 1, text: "Send Email", completed: false },
-  ]);
+  const initialValue = localStorage.getItem("todos")
+    ? JSON.parse(localStorage.getItem("todos"))
+    : [{ id: Date.now(), text: "Send Email", completed: false }];
+
+  const [todos, setTodos] = useState(initialValue);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const handleToggle = (id) => {
     setTodos(
